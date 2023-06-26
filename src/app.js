@@ -1,4 +1,4 @@
-import { Express } from "express-serve-static-core"; //importando o framework express
+import express from "express"; //importando o framework express
 
 const app = express();//inicializando 
 app.use(express.json);
