@@ -11,6 +11,6 @@
   "author": "Sabrina Bezerra",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.22"
   }
 }
