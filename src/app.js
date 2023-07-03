@@ -28,4 +28,12 @@ function buscarLivro(id){
     return livros.findIndex(livro => livro.id == id);
 }
 
+app.delete('/livros/:id', (req, res) => {
+    //método desestruturado
+    let {id} = req.params;//mesma coisa que: req.params.id
+    let index = buscarLivro(id);
+    livros.splice(index, 1);
+    res.send(`O Livro do id ${id} foi deletado com sucesso`);
+})
+
 export default app;
