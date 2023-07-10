@@ -1,0 +1,2 @@
+CONTROLLE = trabalhador, quem leva e trás as coisas. Se fosse real seria um garçom
+ROUTER = arquivos com as rotas de get, put, delete e post de cada objeto
