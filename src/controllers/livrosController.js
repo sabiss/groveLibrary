@@ -19,17 +19,21 @@ class livrosController{
         }
     }
     
-    static atualizarLivro = (req, res)=>{
-        const id = req.params.id;
-        livros.findByIdAndUpdate(id, {$set: req.body},(err)=>{
-            if(!err){
-                res.status(200).send({message: "Livro atualizado com sucesso"})
-            }else{
-                res.status(500).send({message: "Erro ao atualizar livro - " + err.message});
-            }
-        })//parâmetros: id, arquivo com a atualização
-
-    }
+    static atualizarLivro = async (req, res) => {
+        const id = req.params.id; // parâmetros são informações que vêm na rota
+      
+        try {
+            //vou pesquisar o livro pelo id e vou atualizar pelo que tiver no body da requisição
+          const livroAtualizado = await livros.findByIdAndUpdate(id, { $set: req.body }, { new: true });//set = pelo que eu devo mudar
+          if (!livroAtualizado) {
+            return res.status(404).json({ message: "Livro não encontrado." });
+          }
+          res.status(200).json({ message: "Livro atualizado com sucesso", livro: livroAtualizado });
+        } catch (error) {
+          res.status(500).json({ message: "Erro ao atualizar livro - " + error.message });
+        }
+      }
+      
 } 
 
 export default livrosController;
