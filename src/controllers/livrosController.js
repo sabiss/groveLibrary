@@ -32,7 +32,23 @@ class livrosController{
         } catch (error) {
           res.status(500).json({ message: "Erro ao atualizar livro - " + error.message });
         }
-      }
+    }
+
+    static listarLivroPorID = async (req, res) => {
+        const id = req.params.id;
+
+        try{
+            const livro = await livros.findById(id)
+            if(livro){
+                res.status(200).send(livro)
+            }else{
+                res.status(404).send({message: `erro ao buscar pelo livro - ${err.message}`})
+            }
+        }catch(err){
+            res.status(404).send(`ID não encontrado - ${err.message}`)
+        }
+        
+    }
       
 } 
 
