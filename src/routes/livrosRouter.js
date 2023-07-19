@@ -6,6 +6,6 @@ const router = express.Router();
 router
     .get('/livros', livrosController.listarLivros)
     .post('/livros', livrosController.cadastrarLivro)
-    .put('/livros?:id', livrosController.atualizarLivro);
+    .put('/livros/:id', livrosController.atualizarLivro);//os dois pontos indica que ali vai chegar um parâmetro do tipo id
 
 export default router;
