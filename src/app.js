@@ -12,11 +12,6 @@ const app = express();//inicializando
 app.use(express.json());//a api vai entender o json que estou enviando
 routes(app)
 
-app.put('/livros/:id', (req, res) => {
-    const index = buscarLivro(req.params.id)//o id para estar dentro dos PARAMS(parâmetros) da requisição
-    livros[index].autor = req.body.autor // vai pegar o json que está em body e vai poder o que tem dentro do atributo TITULO
-    res.json(livros[index])//exibo o livro alterado
-})
 
 function buscarLivro(id){
     return livros.findIndex(livro => livro.id == id);
