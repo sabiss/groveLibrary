@@ -12,11 +12,6 @@ const app = express();//inicializando
 app.use(express.json());//a api vai entender o json que estou enviando
 routes(app)
 
-
-function buscarLivro(id){
-    return livros.findIndex(livro => livro.id == id);
-}
-
 app.delete('/livros/:id', (req, res) => {
     //método desestruturado
     let {id} = req.params;//mesma coisa que: req.params.id
