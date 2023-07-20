@@ -3,3 +3,4 @@ ROUTER = arquivos com as rotas de get, put, delete e post de cada objeto
 
 server.js = instância o servidor
 app.js = conecta-se com o banco e dá a ele a instância do express para ter contato com as rotas
+models = onde fica os schemas, o modelo da classe
