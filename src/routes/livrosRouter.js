@@ -7,6 +7,7 @@ router
     .get('/livros', livrosController.listarLivros)
     .get('/livros/:id', livrosController.listarLivroPorID)
     .post('/livros', livrosController.cadastrarLivro)
-    .put('/livros/:id', livrosController.atualizarLivro);//os dois pontos indica que ali vai chegar um parâmetro do tipo id
+    .put('/livros/:id', livrosController.atualizarLivro)//os dois pontos indica que ali vai chegar um parâmetro do tipo id
+    .delete('/livros/:id', livrosController.deletarLivro)
 
 export default router;
