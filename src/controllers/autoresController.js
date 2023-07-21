@@ -28,6 +28,25 @@ class autoresController {
             res.status(500).send({message:`ID de autor não encontrado - ${err.message}`})
         }
     }
+    static atualizarAutor = async (req, res) =>{
+        const id = req.params.id;
+        try{
+            await autores.findByIdAndUpdate(id, {$set: req.body}, {new: true});
+            res.status(200).send({message:"Autor atualizado com sucesso"})
+        }catch(error){
+            res.status(404).send({message: `Erro ao atualizar autor - ${error}`})
+        }
+    }
+    static deletarAutor = async (req,res) =>{
+        const id = req.params.id
+        try{
+            await autores.findByIdAndDelete(id);
+            res.status(200).send({message: "Autor deletado com sucesso"})
+        }catch(error){
+            res.status(404).send({message: `Erro ao deletar autor - ${error}`})
+        }
+        
+    }
 }
 
 export default autoresController
