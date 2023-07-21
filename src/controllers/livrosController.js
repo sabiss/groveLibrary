@@ -3,7 +3,8 @@ import livros from "../models/Livro.js";
 class livrosController{
     static async listarLivros(req, res) {
         try {
-          const listaLivros = await livros.find(); // retorna todos os livros
+          const listaLivros = await livros.find()// retorna todos os livros
+          .populate('autor');//vai popular o atributo autor com os dados sobre o autor ao qual pertence o ID 
           res.status(200).json(listaLivros);
         } catch (error) {
           res.status(500).send("Erro ao buscar livros: " + error);
@@ -39,6 +40,7 @@ class livrosController{
 
         try{
             const livro = await livros.findById(id)
+            .populate('autor', 'nome');//vai popular o atributo autor com os dados sobre o autor ao qual pertence o ID e so vai me mostrar o nome do autor
             if(livro){
                 res.status(200).send(livro)
             }else{
