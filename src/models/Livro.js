@@ -5,7 +5,7 @@ const schemaLivro = new mongoose.Schema({
     id: {type: Number},
     titulo: {type: String, required: true},//required = dado obrigatório na ogra de criar um livro
     autor: {type: mongoose.Schema.Types.ObjectId, ref: 'autores',required: true},//autor vai ser um ID que faz REFerência ao schema autor, mostrando assim o objeto autor com todas as informações do autor dono do id
-    editora: {type: mongoose.Schema.Types.ObjectId, ref: 'livros',required: true},
+    editora: {type: mongoose.Schema.Types.ObjectId, ref: 'editoras',required: true},
     numeroPaginas: {type: Number}
 });
 
