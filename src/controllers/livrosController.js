@@ -65,6 +65,16 @@ class livrosController{
             res.status(500).send({message:`ID do livro não encontrado, não sendo deletado - ${error.message}`})
         }
     }
+    static buscaPorNomeDoLivro = async (req,res) =>{
+        const nomeDoLivro = req.query.titulo//QUERY são parâmetros de consulta
+        //localhost:3000/livros/busca?nome=Harry Potter 
+        try{
+            const livro = await livros.find({'titulo': nomeDoLivro})
+            res.status(200).send(livro)
+        }catch(error){
+            res.status(404).send("Não existe livro com esse nome")
+        }
+    }
 } 
 
 export default livrosController;
