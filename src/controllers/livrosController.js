@@ -81,8 +81,8 @@ class livrosController{
         const nomeAutor = req.query.autor
         try{
             const autor = await autores.find({"nome": nomeAutor})
-            const idDoAutor = autor[0]._id//_id: new ObjectId("64bfcb4b50901431fe8c98ac")
-            console.log(idDoAutor)//resultado: []
+            const idDoAutor = autor[0]._id//find() retorna uma lista de autores
+            console.log(idDoAutor)
             try{
                 const livrosDoAutor = await livros.find({"autor": idDoAutor})
                 res.status(200).json(livrosDoAutor)
