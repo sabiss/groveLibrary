@@ -6,6 +6,7 @@ const router = express.Router();
 router//as rotas tem que ser escritas das MAIS ESPECÍFICAS para as MENOS ESPECÍFICAS
     .get('/livros', livrosController.listarLivros)
     .get('/livros/buscaTituloLivro', livrosController.buscaPorNomeDoLivro)
+    //.get('/livros/buscaPorNomeDoAutor', livrosController.buscaPorNomeAutor)
     .get('/livros/:id', livrosController.listarLivroPorID)
     .post('/livros', livrosController.cadastrarLivro)
     .put('/livros/:id', livrosController.atualizarLivro)//os dois pontos indica que ali vai chegar um parâmetro do tipo id
