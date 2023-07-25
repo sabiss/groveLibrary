@@ -1,5 +1,6 @@
 import livros from "../models/Livro.js";
 import autores from "../models/Autor.js"
+import editoras from '../models/Editora.js'
 
 class livrosController{
     static async listarLivros(req, res) {
@@ -83,8 +84,8 @@ class livrosController{
             const idDoAutor = autor[0]._id//_id: new ObjectId("64bfcb4b50901431fe8c98ac")
             console.log(idDoAutor)//resultado: []
             try{
-                const livroDoAutor = await livros.find({"autor": idDoAutor})
-                res.status(200).json(livroDoAutor)
+                const livrosDoAutor = await livros.find({"autor": idDoAutor})
+                res.status(200).json(livrosDoAutor)
             }catch(erro){
                 res.status(404).send(`Erro ao buscar o livro com o id do autor ${nomeAutor} - ${erro}`)
             }
@@ -93,15 +94,22 @@ class livrosController{
         }
         
     }
-    // static buscarLivroPorEditora = async (req,res) =>{
-    //     const editora = req.query.editora
-    //     try{
-    //         const livrosDaEditora = livros.find({"editora": editora})
-    //         res.status(200).send(livrosDaEditora)
-    //     }catch(error){
-    //         res.status(404).send("O Livro não foi encontrado")
-    //     }
-    // }
+    static buscarLivroPorEditora = async (req,res) =>{
+        const nomeDaEditora = req.query.editora
+        console.log(nomeDaEditora)
+        try{
+            const editora = await editoras.find({"nome":nomeDaEditora})
+            const idDaEditora = editora[0]._id
+            try{
+                const livrosDaEditora = await livros.find({"editora": idDaEditora})
+                res.status(200).json(livrosDaEditora)
+            }catch(erro){
+                res.status(404).send("Erro o livro da editora - " + erro)
+            }
+        }catch(erro){
+            res.status(404).send("Erro ao buscar a editora do livro - " + erro)
+        }
+    }
 } 
 
 export default livrosController;
