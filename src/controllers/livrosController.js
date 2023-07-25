@@ -1,4 +1,5 @@
 import livros from "../models/Livro.js";
+import autores from "../models/Autor.js"
 
 class livrosController{
     static async listarLivros(req, res) {
@@ -75,16 +76,24 @@ class livrosController{
             res.status(404).send("Não existe livro com esse nome")
         }
     }
-    // static buscaPorNomeAutor = async (req,res) =>{
-    //     const nomeAutor = req.query.autor
-    //     try{
-    //         const livroDoAutor = await livros.find({"autor.nome": nomeAutor})
-    //         console.log(livroDoAutor)
-    //         res.status(200).json(livroDoAutor)
-    //     }catch(erro){
-    //         res.status(404).send("O Livro não foi encontrado")
-    //     }
-    // }
+    static buscaPorNomeAutor = async (req,res) =>{
+        const nomeAutor = req.query.autor
+        try{
+            const autor = await autores.find({"nome": nomeAutor})
+            console.log(autor)
+            const idDoAutor = autor._id//_id: new ObjectId("64bfcb4b50901431fe8c98ac")
+            console.log(idDoAutor)
+            try{
+                const livroDoAutor = await livros.find({"autor": idDoAutor})
+                res.status(200).json(livroDoAutor)
+            }catch(erro){
+                res.status(404).send(`Erro ao buscar o livro com o id do autor ${nomeAutor} - ${erro}`)
+            }
+        }catch(erro){
+            res.status(404).send("Erro ao buscar o nome do autor - " + erro)
+        }
+        
+    }
     // static buscarLivroPorEditora = async (req,res) =>{
     //     const editora = req.query.editora
     //     try{
