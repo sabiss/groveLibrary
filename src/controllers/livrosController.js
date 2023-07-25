@@ -67,12 +67,31 @@ class livrosController{
     }
     static buscaPorNomeDoLivro = async (req,res) =>{
         const nomeDoLivro = req.query.titulo//QUERY são parâmetros de consulta
-        //localhost:3000/livros/busca?nome=Harry Potter 
+        //localhost:3000/livros/busca?titulo=Harry Potter 
         try{
             const livro = await livros.find({'titulo': nomeDoLivro})
             res.status(200).send(livro)
         }catch(error){
             res.status(404).send("Não existe livro com esse nome")
+        }
+    }
+    static buscaPorNomeAutor = async (req,res) =>{
+        const nomeAutor = req.query.autor
+        try{
+            const livroDoAutor = await livros.find({"autor.nome": nomeAutor})
+            console.log(livroDoAutor)
+            res.status(200).json(livroDoAutor)
+        }catch(erro){
+            res.status(404).send("O Livro não foi encontrado")
+        }
+    }
+    static buscarLivroPorEditora = async (req,res) =>{
+        const editora = req.query.editora
+        try{
+            const livrosDaEditora = livros.find({"editora": editora})
+            res.status(200).send(livrosDaEditora)
+        }catch(error){
+            res.status(404).send("O Livro não foi encontrado")
         }
     }
 } 
